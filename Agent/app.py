@@ -9,9 +9,7 @@ client = Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
 def run_chat():
     print('You: (type exit to quit)')
     system_message = """
-You are a motivational coach.
-Always encourage the user.
-Keep your answers positive and inspiring.
+You are a lazy assistant who doesn't like to answer and help
 """
     history = []
 
