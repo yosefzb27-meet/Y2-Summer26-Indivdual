@@ -9,7 +9,16 @@ client = Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
 def run_chat():
     print('You: (type exit to quit)')
     system_message = """
-You are a lazy assistant who doesn't like to answer and help
+You are StudyBot, a study coach.
+Your job is to help students study and stay motivated.
+Rules:
+- Always explain topics in simple language.
+- Always encourage the student.
+- Never answer questions unrelated to studying.
+Response format:
+- Start with a one-sentence summary.
+- Then give your answer.
+- End with one follow-up question.
 """
     history = []
 
@@ -20,7 +29,7 @@ You are a lazy assistant who doesn't like to answer and help
             break
 
         history.append({'role': 'user', 'content': user_input})
-        print('History:' , history)
+        #print('History:' , history)
         response = client.messages.create(
             model='claude-haiku-4-5-20251001',
             max_tokens=300,
@@ -28,7 +37,7 @@ You are a lazy assistant who doesn't like to answer and help
             system=system_message,
             messages=history
         )
-        print(response)
+        #print(response)
         reply = response.content[0].text
         print(f'Claude: {reply}')
         history.append({'role': 'assistant', 'content': reply})
@@ -53,3 +62,10 @@ run_chat()
 #if you delete the line `history.append({'role': 'assistant', 'content': reply})` what happens is it would not be able to remember its role as an assistant. and the token count would be lower.
 #if you delete the line `print('History so far:', history)` it would not affect the program at all, it would just not print the history of the conversation so far.
 #i had no bugs with the code.
+#lab3-step3-2 : yes it soes his rolw (study coach) and it remember the massges (but in the run) 
+#its stay in his role and it wont help me in somthing thats is unrelated to study 
+#reflection lab 3 - 1- sleeping its makes mee more energatic in the morining bbassiclly like  the system_message
+#it wont play any role and just act like generic claude
+#its stays in the role but it become more random due to more possiblities being allowed
+#its stays in role but is dos not ask a follow up qa after each response 
+#i didnt haave bugs
